@@ -1,62 +1,686 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prashant Kumar - iOS Developer</title>
+    <title>Prashant Kumar - Senior iOS Developer</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px; }
-        h1 { font-size: 36px; margin-bottom: 5px; }
-        h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 40px; }
-        .contact, .section { margin-bottom: 20px; }
-        a.button {
-            display: inline-block;
-            padding: 12px 20px;
-            background: #0078ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        a.button:hover { background: #005fcc; }
-        ul { line-height: 1.6; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .header .tagline {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .contact-item i {
+            font-size: 20px;
+        }
+
+        .btn-download {
+            display: inline-block;
+            padding: 15px 35px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 50px 40px;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .main {
+            padding: 50px 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #764ba2;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            animation: fillBar 1.5s ease-in-out;
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0;
+            }
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .tag:hover {
+            transform: scale(1.05);
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+            border-left: 2px solid #667eea;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #fff, 0 0 0 6px #667eea;
+        }
+
+        .experience-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .experience-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .project-tech {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .languages {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .language-badge {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .education-degree {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .education-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .header .tagline {
+                font-size: 18px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar, .main {
+                padding: 30px 20px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Prashant Kumar</h1>
-        <p><strong>Senior iOS Developer</strong></p>
-
-        <div class="contact">
-            <p>📞 +91-7814802725</p>
-            <p>✉ prashant.iosdeveloper@gmail.com</p>
-            <p>🔗 <a href="https://www.linkedin.com/in/prashant-kumar-284a5263/" target="_blank">LinkedIn Profile</a></p>
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <h1>PRASHANT KUMAR</h1>
+                <p class="tagline">Senior iOS Developer | Swift Expert | 7+ Years Experience</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>+91-7814802725</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span>prashant.iosdeveloper@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Vijayawada, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🔗</span>
+                        <a href="https://www.linkedin.com/in/prashant-kumar-284a5263/" target="_blank" style="color: white; text-decoration: none;">LinkedIn Profile</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn-download">Download Resume PDF</a>
+            </div>
         </div>
 
-        <a class="button" href="prashant_resume.pdf" download>Download Resume</a>
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Personal Details -->
+                <div class="section">
+                    <h2 class="section-title">Personal Details</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Experience</div>
+                            <div class="info-value">7+ Years</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">Vijayawada</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Date of Birth</div>
+                            <div class="info-value">Feb 15, 1992</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Status</div>
+                            <div class="info-value">Single</div>
+                        </div>
+                    </div>
+                </div>
 
-        <h2>Skills</h2>
-        <ul>
-            <li>Swift, UIKit, SwiftUI, Combine</li>
-            <li>CoreBluetooth, CoreLocation, SQLite, CoreData</li>
-            <li>MVC, MVVM, VIPER, Clean Architecture</li>
-            <li>Git, Jira, Firebase, API Integration, GraphQL</li>
-        </ul>
+                <!-- Core Skills -->
+                <div class="section">
+                    <h2 class="section-title">Core Skills</h2>
+                    <div class="skill-item">
+                        <div class="skill-name">Swift & SwiftUI</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">iOS Development</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">MVVM Architecture</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Combine Framework</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">CoreData & SQLite</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
 
-        <h2>Experience</h2>
-        <p><strong>Senior iOS Developer</strong> - Channel Soft (2024 - Present)</p>
-        <p><strong>Senior iOS Developer</strong> - Blue Copper Technologies (2022 - 2024)</p>
-        <p><strong>iOS Developer</strong> - Various firms (2017 - 2022)</p>
+                <!-- Languages -->
+                <div class="section">
+                    <h2 class="section-title">Languages</h2>
+                    <div class="languages">
+                        <div class="language-badge">🇬🇧 English</div>
+                        <div class="language-badge">🇮🇳 Hindi</div>
+                        <div class="language-badge">🇮🇳 Bengali</div>
+                    </div>
+                </div>
 
-        <h2>Projects</h2>
-        <ul>
-            <li>eSanjeevani OPD - National Telemedicine App</li>
-            <li>Pricepally - Online Grocery App</li>
-            <li>Experiential Insight - Video Coaching/Consultation</li>
-            <li>SeeMyTask, Paydat, AlSalam Pizza & More</li>
-        </ul>
+                <!-- Education -->
+                <div class="section">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education-box">
+                        <div class="education-degree">B.Tech in Electronics & Telecommunication</div>
+                        <div class="education-details">
+                            <p>Annamalai University</p>
+                            <p>Year: 2016 | CGPA: 6.8/10</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="section">
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="tag">Java Course - JLC Bangalore</div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main">
+                <!-- Profile Summary -->
+                <div class="section">
+                    <h2 class="section-title">Profile Summary</h2>
+                    <p style="color: #666; line-height: 1.8;">
+                        Seasoned iOS Developer with <span class="highlight">7+ years</span> of expertise in building robust, scalable, and user-centric mobile applications. Proficient in <strong>Swift, SwiftUI, UIKit</strong>, and modern iOS frameworks. Proven track record in developing healthcare, e-commerce, and enterprise applications with focus on clean architecture and best practices.
+                    </p>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="section">
+                    <h2 class="section-title">Technical Expertise</h2>
+                    <div class="tech-tags">
+                        <span class="tag">Swift</span>
+                        <span class="tag">SwiftUI</span>
+                        <span class="tag">UIKit</span>
+                        <span class="tag">Combine</span>
+                        <span class="tag">CoreBluetooth</span>
+                        <span class="tag">CoreLocation</span>
+                        <span class="tag">CoreData</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">RESTful API</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">MVVM</span>
+                        <span class="tag">VIPER</span>
+                        <span class="tag">Clean Architecture</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Jira</span>
+                        <span class="tag">XCTest</span>
+                        <span class="tag">Multithreading</span>
+                        <span class="tag">Deep Linking</span>
+                        <span class="tag">Autolayout</span>
+                    </div>
+                </div>
+
+                <!-- Work Experience -->
+                <div class="section">
+                    <h2 class="section-title">Work Experience</h2>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Senior iOS Developer</div>
+                        <div class="experience-company">Channel Soft</div>
+                        <div class="experience-date">Oct 2024 - Present</div>
+                        <p style="color: #666;">iOS application development from scratch, implementing modern architecture patterns and best practices.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Senior iOS Developer</div>
+                        <div class="experience-company">Blue Copper Technologies</div>
+                        <div class="experience-date">Jul 2022 - Jul 2024 (2 Years)</div>
+                        <p style="color: #666;">Led iOS application development initiatives, mentored junior developers, and implemented scalable solutions.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">Senior iOS Developer</div>
+                        <div class="experience-company">Geek Informatics & Technologies Private Limited</div>
+                        <div class="experience-date">Dec 2021 - Jun 2022 (7 Months)</div>
+                        <p style="color: #666;">Developed enterprise-level iOS applications with focus on performance optimization.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">iOS Developer</div>
+                        <div class="experience-company">Volumetree</div>
+                        <div class="experience-date">Sep 2020 - Nov 2021 (1 Year 3 Months)</div>
+                        <p style="color: #666;">Specialized in iPhone and iPad app development with modern Swift frameworks.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">iOS Developer</div>
+                        <div class="experience-company">DecodersHub</div>
+                        <div class="experience-date">Sep 2019 - Sep 2020 (1 Year)</div>
+                        <p style="color: #666;">Built custom iPhone and iPad applications with rich user interfaces.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-title">iOS Developer</div>
+                        <div class="experience-company">Cosmic Coders</div>
+                        <div class="experience-date">Aug 2017 - Aug 2019 (2 Years)</div>
+                        <p style="color: #666;">Started iOS development journey, working on various client projects.</p>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="section">
+                    <h2 class="section-title">Featured Projects</h2>
+                    
+                    <div class="project-card">
+                        <div class="project-title">eSanjeevaniOPD</div>
+                        <div class="project-tech">Swift • MVVM • Twilio • XCTest</div>
+                        <div class="project-description">
+                            National Teleconsultation Service for Ministry of Health & Family Welfare under Ayushman Bharat Scheme. First-of-its-kind online OPD service enabling safe video-based clinical consultations between doctors and patients.
+                        </div>
+                        <a href="https://apps.apple.com/in/app/esanjeevaniopd/id1547221017" target="_blank" class="project-link">
+                            View on App Store →
+                        </a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Experiential Insight</div>
+                        <div class="project-tech">Swift • MVVM • Twilio Video Calling</div>
+                        <div class="project-description">
+                            Coaching platform connecting coaches with clients through audio and video sessions. Features session scheduling, real-time communication, and attendance tracking.
+                        </div>
+                        <span style="color: #999; font-size: 14px;">Duration: 24 Months</span>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Pricepally</div>
+                        <div class="project-tech">Swift • MVVM</div>
+                        <div class="project-description">
+                            Full-featured online shopping application with seamless user experience and robust backend integration.
+                        </div>
+                        <a href="https://apps.apple.com/us/app/pricepally/id1491351293" target="_blank" class="project-link">
+                            View on App Store →
+                        </a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">SeeMyTask</div>
+                        <div class="project-tech">SwiftUI • MVVM • Combine • CoreData</div>
+                        <div class="project-description">
+                            Modern task management application built entirely with SwiftUI, featuring reactive programming with Combine framework and local data persistence.
+                        </div>
+                        <span style="color: #999; font-size: 14px;">Duration: 24 Months</span>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">AlSalam Pizza</div>
+                        <div class="project-tech">Swift • MVVM • MapKit</div>
+                        <div class="project-description">
+                            Pizza ordering and delivery tracking application with integrated maps and real-time order updates.
+                        </div>
+                        <a href="https://apps.apple.com/us/app/alsalam-pizza/id1493986422" target="_blank" class="project-link">
+                            View on App Store →
+                        </a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Paydat</div>
+                        <div class="project-tech">SwiftUI • MVVM • Combine</div>
+                        <div class="project-description">
+                            Secure payment processing application with modern SwiftUI interface and reactive architecture.
+                        </div>
+                        <span style="color: #999; font-size: 14px;">Duration: 12 Months</span>
+                    </div>
+                </div>
+
+                <!-- Other Interests -->
+                <div class="section">
+                    <h2 class="section-title">Interests</h2>
+                    <div class="tech-tags">
+                        <span class="tag">🌐 Web Surfing</span>
+                        <span class="tag">🏏 Cricket</span>
+                        <span class="tag">💻 Technology</span>
+                        <span class="tag">📚 Continuous Learning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
